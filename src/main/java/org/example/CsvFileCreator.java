@@ -20,16 +20,6 @@ import java.util.regex.Pattern;
 
 public class CsvFileCreator {
 
-
-    Map<String, String> AUTHOR_BOOK_MAP = new HashMap<>() {
-        {
-            put("Dan Simmons", "Hyperion");
-            put("Douglas Adams", "The Hitchhiker's Guide to the Galaxy");
-        }
-    };
-    String[] HEADERS = { "author", "title"};
-
-
     /**
      *
      * @param filename
@@ -37,7 +27,7 @@ public class CsvFileCreator {
      * This method creates a csv file and loops through a map collection to add title and author
      * to the csv created
      */
-    public  void createCsvFile(String filename)  throws IOException{
+    public  void createCsvFile(String filename, String [] HEADERS, Map<String, String> AUTHOR_BOOK_MAP)  throws IOException{
 
         Pattern  pattern = Pattern.compile("[A-Za-z]+\\.csv");
         Matcher matcher = pattern.matcher(filename);
