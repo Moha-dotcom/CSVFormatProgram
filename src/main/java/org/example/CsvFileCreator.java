@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
  */
 
 
-public class CsvFileCreator {
+public class CsvFileCreator implements FileCreator {
 
     /**
      *
