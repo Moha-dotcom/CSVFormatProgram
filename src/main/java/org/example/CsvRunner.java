@@ -1,6 +1,6 @@
 package org.example;
 
-import com.google.common.base.Splitter;
+
 
 import java.io.IOException;
 import java.util.*;
@@ -9,20 +9,25 @@ public class CsvRunner {
 
     public static void main(String[] args) throws IOException {
 
-        Map<String, String> AUTHOR_BOOK_MAP = new HashMap<>() {
+        Map<Integer, String> PLAYER_LIST = new HashMap<>() {
             {
-                put("Dan Simmons", "Hyperion");
-                put("Douglas Adams", "The Hitchhiker's Guide to the Galaxy");
+                put(7, "Cristino Ronaldo");
+                put(10 , "Kylian Mbapper");
             }
         };
-        String[] HEADERS = { "author", "title"};
+        String[] HEADERS = { "Player No", "Player Name"};
 
 
         String Filename = "Folder.csv";
 
         CsvFileCreator csvcreator = new CsvFileCreator();
-        csvcreator.createCsvFile(Filename, HEADERS, AUTHOR_BOOK_MAP);
+        csvcreator.createCsvFile(Filename, HEADERS, PLAYER_LIST);
         csvcreator.reader(Filename);
+
+
+
+
+
 
 
 
