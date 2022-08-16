@@ -25,17 +25,15 @@ public class CsvFileCreator implements FileCreator {
      * This method creates a csv file and loops through a map collection to add title and author
      * to the csv created
      */
-    public  void createCsvFile(String filename, String [] HEADERS, Map<Integer, String> PLAYER_LIST) throws IOException  {
+    public @Override void createCsvFile(String filename, String [] HEADERS, Map<Integer, String> PLAYER_LIST) throws IOException
+    , IllegalArgumentException{
 
-
-
-        try{
             if(checkcsvFormat(filename)) {
-                FileWriter out = new FileWriter(filename);
+                FileWriter outfile = new FileWriter(filename);
                 System.out.println("File with the name" +  " " +  Arrays.asList(filename.split("\\.")).get(0) + " "
                         + "Was Created SuccessFully!.");
-                try (CSVPrinter printer = new CSVPrinter(out, CSVFormat.DEFAULT
-                        .withHeader(HEADERS).withRecordSeparator("     \n"))) {
+                try (CSVPrinter printer = new CSVPrinter(outfile, CSVFormat.DEFAULT
+                        .withHeader(HEADERS).withRecordSeparator("     \n"))) {  // Prints values in a CSV format.
 
                     // Loop through AUTHOR_BOOK_MAP
                     PLAYER_LIST.forEach((playerno, playername) -> {
@@ -50,16 +48,14 @@ public class CsvFileCreator implements FileCreator {
                     throw new IOException("");
                 }
 
-                out.close();
+                outfile.close();
             }else {
                 System.out.println("File name can't be created, Please correct the syntax or the format");
                 System.out.println("File name was created this way " + filename + "\n");
                 System.out.println("Right way to create your  a file name would be: " + "\n" +
                         "\t\t " + Arrays.asList(filename.split("\\.")).get(0) + ".csv");
             }
-        }catch (IllegalArgumentException e){
-            System.out.println("file name ");
-        }
+
 
 //        FileWriter out = new FileWriter(filename); // // Writes a file
         //// Creates a printer that will print values to the given stream following the CSVFormat
@@ -83,10 +79,11 @@ public class CsvFileCreator implements FileCreator {
      */
 
 
-    public void reader(String filename) throws IOException {
+    public @Override void reader(String filename) throws IOException {
       if(checkcsvFormat(filename)){
           try{
               FileReader in = new FileReader(filename);
+              // Parses CSV files according to the specified format.
               CSVParser records = new CSVParser(in, CSVFormat.DEFAULT);
               records.forEach((i) -> {
                   System.out.println(i.get(0)  + "\t\t" + i.get(1));
